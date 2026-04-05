@@ -212,7 +212,7 @@ export const SLIDES: SlideData[] = [
     title: '¡Muchas gracias por su ayuda!',
     subtitle: 'JP 2025/2026',
     content: {
-      description: "Formar a una persona requiere tiempo, pero impacta directamente en el equipo y el negocio.",
+      description: "La verdadera grandeza de un líder no se mide por lo que logra, sino por lo que otros logran gracias a su guía.",
       bullets: [
         "Acompañe activamente.",
         "Comparta conocimiento.",

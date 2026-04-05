@@ -767,53 +767,86 @@ export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint }) => {
     const { description } = data.content;
 
     return (
-        <motion.div className="flex flex-col justify-center items-center h-full text-center relative max-w-6xl mx-auto overflow-y-auto custom-scrollbar px-4 py-4" initial="hidden" animate="show" variants={containerVariants}>
-            <motion.div variants={itemVariants} className="mb-12 relative z-10">
-                <div className="text-6xl md:text-8xl mb-6 animate-bounce">🙏✨</div>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 mb-4 leading-tight drop-shadow-sm font-display">
-                    {data.title || '¡Muchas gracias por su ayuda!'}
+        <motion.div 
+            className="flex flex-col justify-center items-center h-full text-center relative max-w-6xl mx-auto px-6 py-12" 
+            initial="hidden" 
+            animate="show" 
+            variants={containerVariants}
+        >
+            {/* Background Decorative Element */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
+
+            <motion.div variants={itemVariants} className="mb-16 relative z-10">
+                <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.2, type: "spring" }}
+                    className="text-7xl md:text-9xl mb-8 drop-shadow-2xl"
+                >
+                    🙏
+                </motion.div>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 mb-6 leading-tight drop-shadow-sm font-display">
+                    {data.title || '¡Muchas gracias!'}
                 </h1>
-                <p className="text-xl md:text-2xl text-indigo-600 font-black tracking-[0.3em] uppercase">
-                    {data.subtitle || 'JP 2025/2026'}
-                </p>
+                <div className="flex items-center justify-center gap-4">
+                    <div className="h-px w-12 bg-indigo-200" />
+                    <p className="text-xl md:text-2xl text-indigo-600 font-black tracking-[0.4em] uppercase">
+                        {data.subtitle || 'JP 2025/2026'}
+                    </p>
+                    <div className="h-px w-12 bg-indigo-200" />
+                </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-10 relative z-10">
-                <GlassCard className="p-8 md:p-10 text-left border-indigo-100 flex flex-col justify-center group shadow-2xl md:col-span-2">
-                    <div className="relative z-10">
-                        <div className="flex items-center gap-4 mb-6">
-                            <GlowIcon icon={Sparkles} color="text-indigo-600" bg="bg-indigo-50" size={28} />
-                            <h3 className="text-2xl font-black text-slate-900 tracking-tight font-display">Cierre del Programa</h3>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full items-center relative z-10">
+                {/* Motivational Quote Card */}
+                <motion.div variants={itemVariants} className="md:col-span-8">
+                    <GlassCard className="p-10 md:p-16 text-center border-indigo-100/50 bg-white/40 shadow-2xl relative group">
+                        <div className="absolute top-6 left-8 text-indigo-200/50">
+                            <Sparkles size={64} />
                         </div>
-                        <p className="text-slate-600 text-lg md:text-xl leading-relaxed font-bold italic tracking-tight">
-                            "{description}"
-                        </p>
-                    </div>
-                </GlassCard>
-
-                <GlassCard className="p-8 border-emerald-100 bg-emerald-50/30 flex flex-col justify-center items-center text-center group shadow-xl">
-                    <div className="mb-6">
-                        <GlowIcon icon={Users} color="text-emerald-600" bg="bg-emerald-50" size={24} />
-                    </div>
-                    <h4 className="text-sm font-black text-slate-400 uppercase tracking-widest mb-4 font-display">Contacto</h4>
-                    <div className="space-y-4 w-full">
-                        {contacts.map((contact: any, idx: number) => (
-                            <div key={idx} className="p-3 bg-white/60 rounded-xl border border-white/80 shadow-sm">
-                                <span className="block text-[10px] font-black text-indigo-500 uppercase mb-1">{contact.role}</span>
-                                <span className="block text-sm font-bold text-slate-700">{contact.email}</span>
+                        <div className="relative z-10">
+                            <p className="text-2xl md:text-4xl font-black text-slate-800 leading-tight tracking-tight italic mb-8">
+                                "{description || 'Formar a una persona requiere tiempo, pero impacta directamente en el equipo y el negocio.'}"
+                            </p>
+                            <div className="flex items-center justify-center gap-3 text-indigo-500">
+                                <div className="h-1 w-1 rounded-full bg-indigo-400" />
+                                <span className="text-xs font-black uppercase tracking-[0.3em]">Reflexión Final</span>
+                                <div className="h-1 w-1 rounded-full bg-indigo-400" />
                             </div>
-                        ))}
-                    </div>
-                </GlassCard>
+                        </div>
+                    </GlassCard>
+                </motion.div>
+
+                {/* Contact Info Card */}
+                <motion.div variants={itemVariants} className="md:col-span-4">
+                    <GlassCard className="p-8 border-slate-100 bg-white/60 shadow-xl h-full flex flex-col justify-center">
+                        <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-8 text-center">Canales de Contacto</h4>
+                        <div className="space-y-6">
+                            {contacts.map((contact: any, idx: number) => (
+                                <div key={idx} className="group cursor-default">
+                                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100 transition-all group-hover:bg-white group-hover:shadow-md group-hover:-translate-y-1">
+                                        <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                                            <Users size={20} />
+                                        </div>
+                                        <div className="text-left">
+                                            <span className="block text-[9px] font-black text-indigo-500 uppercase tracking-wider mb-0.5">{contact.role}</span>
+                                            <span className="block text-sm font-bold text-slate-700 truncate">{contact.email}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </GlassCard>
+                </motion.div>
             </div>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 no-print relative z-10 pb-12">
+            <motion.div variants={itemVariants} className="mt-16 no-print relative z-10">
                 <button 
                     onClick={onPrint}
-                    className="flex items-center gap-4 px-12 py-6 bg-indigo-600 text-white rounded-full font-black text-base hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-200 hover:-translate-y-1 group active:scale-95 font-display"
+                    className="flex items-center gap-4 px-10 py-5 bg-slate-900 text-white rounded-full font-black text-sm hover:bg-indigo-600 transition-all shadow-2xl hover:-translate-y-1 group active:scale-95 font-display tracking-widest"
                 >
-                    <Download size={24} className="group-hover:scale-110 transition-transform" />
-                    DESCARGAR PDF
+                    <Download size={20} className="group-hover:scale-110 transition-transform" />
+                    DESCARGAR REPORTE PDF
                 </button>
             </motion.div>
         </motion.div>

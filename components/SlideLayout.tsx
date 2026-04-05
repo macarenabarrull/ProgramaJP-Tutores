@@ -75,6 +75,36 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
     }
   };
 
+  // Wake Lock Logic
+  const wakeLock = useRef<any>(null);
+
+  useEffect(() => {
+    const requestWakeLock = async () => {
+      try {
+        if ('wakeLock' in navigator) {
+          wakeLock.current = await (navigator as any).wakeLock.request('screen');
+        }
+      } catch (err: any) {
+        console.error(`${err.name}, ${err.message}`);
+      }
+    };
+
+    const releaseWakeLock = () => {
+      if (wakeLock.current !== null) {
+        wakeLock.current.release();
+        wakeLock.current = null;
+      }
+    };
+
+    if (isFullscreen) {
+      requestWakeLock();
+    } else {
+      releaseWakeLock();
+    }
+
+    return () => releaseWakeLock();
+  }, [isFullscreen]);
+
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
