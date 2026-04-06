@@ -22,330 +22,350 @@ export const ReportView: React.FC<ReportViewProps> = ({ slides }) => {
 
   const objectives = findSlide('intro');
   const closing = findSlide('closing');
-
-  // Filter for tutor content slides
   const tutorSlides = slides.filter(s => s.type === 'tutor-content');
 
   if (!objectives || !closing) {
     return <div className="p-12 text-center text-red-600 font-bold">Error: Datos incompletos para el reporte.</div>;
   }
 
-  const Header = ({ continuation = false, title = "PROGRAMA JP 25-26" }) => (
-    <header className="mb-8 border-b-2 border-slate-900 pb-4">
-        <div className="flex justify-between items-end">
-            <div>
-                <h3 className="text-[9px] text-indigo-600 font-black uppercase tracking-[0.3em] mb-1">
-                    REPORTE ESTRATÉGICO {continuation && <span className="text-slate-300">| CONTINUACIÓN</span>}
-                </h3>
-                <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tighter leading-none">
-                    {title}
-                </h1>
-            </div>
-            <div className="text-right">
-                <div className="text-4xl font-black text-slate-200 tracking-tighter leading-none">fyo<span className="text-indigo-600">.</span></div>
-                <div className="text-[8px] font-black text-slate-400 uppercase tracking-widest mt-1">TALENTO Y CULTURA</div>
-            </div>
+  const Header = ({ sectionTitle = "GUÍA DEL TUTOR" }) => (
+    <header className="mb-6 border-b border-indigo-100 pb-3 flex justify-between items-end">
+        <div>
+            <h3 className="text-[8px] text-indigo-500 font-black uppercase tracking-[0.3em] mb-0.5">
+                PROGRAMA JP 25-26
+            </h3>
+            <h1 className="text-xl font-black text-slate-900 uppercase tracking-tight">
+                {sectionTitle}
+            </h1>
+        </div>
+        <div className="text-right">
+            <div className="text-2xl font-black text-slate-200 tracking-tighter leading-none">fyo<span className="text-indigo-500">.</span></div>
         </div>
     </header>
   );
 
   const Footer = ({ page, total }: { page: number, total: number }) => (
-    <footer className="mt-auto pt-6 flex justify-between items-center text-[9px] text-slate-400 border-t border-slate-100">
-        <div className="flex items-center gap-4">
-            <span className="font-black uppercase tracking-[0.2em] text-slate-900">Programa JP 25-26</span>
-            <span className="w-1 h-1 rounded-full bg-slate-200" />
-            <span className="font-medium">Guía de Acompañamiento para Tutores</span>
+    <footer className="mt-auto pt-4 flex justify-between items-center text-[8px] text-slate-400 border-t border-slate-50">
+        <div className="flex items-center gap-3">
+            <span className="font-black uppercase tracking-[0.15em] text-slate-800">Reporte Ejecutivo</span>
+            <span className="w-0.5 h-0.5 rounded-full bg-slate-200" />
+            <span className="font-medium">Confidencial - Talento y Cultura</span>
         </div>
-        <div className="font-black bg-slate-900 text-white px-3 py-1 rounded-full text-[8px]">
-            PÁGINA {page} / {total}
+        <div className="font-bold text-slate-500">
+            PÁGINA {page} DE {total}
         </div>
     </footer>
   );
 
-  const totalPages = 3 + Math.ceil(tutorSlides.length / 2);
+  const totalPages = 5; // Fixed structure for better organization
 
   return (
-    <div className="w-full bg-slate-100 text-slate-800 font-sans text-[11px] leading-relaxed print:p-0 print:bg-white">
+    <div className="w-full bg-slate-50 text-slate-800 font-sans text-[10px] leading-relaxed print:p-0 print:bg-white">
         
-      {/* --- PAGE 0: COVER PAGE --- */}
-      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[3cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:w-full print:max-w-none print:min-h-screen print:break-after-page overflow-hidden">
-          {/* Decorative Elements */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-50 rounded-full -mr-32 -mt-32 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-50/50 rounded-full -ml-48 -mb-48 blur-3xl" />
+      {/* --- PAGE 0: PORTADA --- */}
+      <div className="w-[210mm] h-[297mm] mx-auto p-[2.5cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:break-after-page overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-indigo-50 rounded-full -mr-24 -mt-24 blur-3xl" />
           
-          <div className="relative z-10 mt-24">
-              <div className="text-8xl font-black text-slate-100 tracking-tighter mb-6 leading-none">fyo<span className="text-indigo-600">.</span></div>
-              <div className="h-1.5 w-24 bg-indigo-600 mb-16"></div>
+          <div className="relative z-10 mt-32">
+              <div className="text-6xl font-black text-slate-100 tracking-tighter mb-4 leading-none">fyo<span className="text-indigo-500">.</span></div>
+              <div className="h-1 w-16 bg-indigo-500 mb-12"></div>
               
-              <h3 className="text-xl font-black text-indigo-600 uppercase tracking-[0.5em] mb-6">Talento y Cultura</h3>
-              <h1 className="text-7xl font-black text-slate-900 leading-[0.9] tracking-tighter mb-12 uppercase">
-                  Manual de<br />Acompañamiento<br /><span className="text-indigo-600">JP 25-26</span>
+              <h3 className="text-base font-black text-indigo-500 uppercase tracking-[0.4em] mb-4">Talento y Cultura</h3>
+              <h1 className="text-5xl font-black text-slate-900 leading-[1] tracking-tighter mb-10 uppercase">
+                  Guía de<br />Acompañamiento<br /><span className="text-indigo-500">JP 25-26</span>
               </h1>
               
-              <div className="max-w-md border-l-4 border-indigo-100 pl-8 py-2">
-                  <p className="text-xl text-slate-500 font-medium leading-relaxed">
-                      Herramientas estratégicas y guía práctica para el desarrollo de la próxima generación de líderes comerciales.
+              <div className="max-w-sm border-l-2 border-indigo-100 pl-6 py-1">
+                  <p className="text-base text-slate-500 font-medium leading-relaxed">
+                      Manual estratégico para tutores: Transformando el potencial joven en liderazgo comercial.
                   </p>
               </div>
           </div>
 
           <div className="mt-auto relative z-10">
-              <div className="grid grid-cols-2 gap-16 border-t-2 border-slate-900 pt-12">
+              <div className="grid grid-cols-2 gap-10 border-t border-slate-200 pt-8">
                   <div>
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] block mb-3">Documento</span>
-                      <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Reporte Ejecutivo de Tutoría</span>
+                      <span className="text-[8px] font-black text-slate-400 uppercase tracking-[0.2em] block mb-2">Documento</span>
+                      <span className="text-sm font-black text-slate-900 uppercase tracking-tight">Reporte de Gestión de Tutoría</span>
                   </div>
                   <div>
-                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] block mb-3">Versión</span>
-                      <span className="text-lg font-black text-slate-900 uppercase tracking-tight">Ciclo 2025 - 2026</span>
+                      <span className="text-[8px] font-black text-slate-400 uppercase tracking-[0.2em] block mb-2">Ciclo</span>
+                      <span className="text-sm font-black text-slate-900 uppercase tracking-tight">2025 - 2026</span>
                   </div>
               </div>
           </div>
       </div>
 
-      {/* --- PAGE 1: ESTRUCTURA Y OBJETIVOS --- */}
-      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:w-full print:max-w-none print:min-h-screen print:break-after-page">
-        <Header title="VISIÓN ESTRATÉGICA" />
+      {/* --- PAGE 1: INTRODUCCIÓN Y OBJETIVOS --- */}
+      <div className="w-[210mm] h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:break-after-page">
+        <Header sectionTitle="01. VISIÓN Y OBJETIVOS" />
         
-        <div className="space-y-12 flex-1">
-            {/* RESUMEN EJECUTIVO EXPANDIDO */}
-            <section className="relative">
-                <div className="absolute -left-8 top-0 bottom-0 w-1 bg-indigo-100 rounded-full" />
-                <h2 className="text-[11px] font-black text-indigo-600 uppercase tracking-[0.3em] mb-6">01. Resumen Ejecutivo</h2>
-                <div className="grid grid-cols-[1fr_240px] gap-12 items-start">
-                    <div className="space-y-6">
-                        <p className="text-sm text-slate-600 leading-relaxed font-medium">
-                            El Programa de Jóvenes Profesionales (JP) representa la inversión más significativa de fyo en el desarrollo de talento comercial. Este reporte actúa como una hoja de ruta para los tutores, asegurando que la transferencia de conocimiento sea estructurada, consciente y efectiva.
+        <div className="space-y-8 flex-1">
+            <section>
+                <h2 className="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em] mb-4">Resumen Ejecutivo</h2>
+                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <p className="text-[11px] text-slate-600 leading-relaxed font-medium mb-4">
+                        El Programa de Jóvenes Profesionales es el semillero de talentos de fyo. El rol del tutor es fundamental para garantizar que los JP no solo aprendan tareas, sino que desarrollen el criterio comercial necesario para el futuro.
+                    </p>
+                    <div className="flex items-center gap-4 bg-white p-4 rounded-xl border border-indigo-50">
+                        <Target className="text-indigo-500 shrink-0" size={24} />
+                        <p className="text-indigo-900 font-black italic text-xs leading-tight">
+                            "{objectives.content.mainGoal}"
                         </p>
-                        <div className="bg-indigo-50 p-6 rounded-3xl border border-indigo-100 relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <Target size={64} />
-                            </div>
-                            <p className="text-indigo-900 font-black italic text-lg leading-tight relative z-10">
-                                "{objectives.content.mainGoal}"
-                            </p>
-                        </div>
-                    </div>
-                    <div className="space-y-4">
-                        <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Pilares del Programa</h3>
-                        <div className="space-y-2">
-                            {objectives.content.pillars.map((p: string, i: number) => (
-                                <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                    <div className="w-2 h-2 rounded-full bg-indigo-500" />
-                                    <span className="font-black text-slate-800 uppercase text-[9px]">{p}</span>
-                                </div>
-                            ))}
-                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* OBJETIVOS POR ÁREA */}
             <section>
-                <h2 className="text-[11px] font-black text-indigo-600 uppercase tracking-[0.3em] mb-6">02. Objetivos y Alcance</h2>
-                <div className="grid grid-cols-3 gap-6">
+                <h2 className="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em] mb-4">Alcance por Áreas</h2>
+                <div className="grid grid-cols-3 gap-4">
                     {objectives.content.stats.map((stat: any, i: number) => {
                         const Icon = IconMap[stat.icon] || Users;
                         return (
-                            <div key={i} className="p-6 border-2 border-slate-50 rounded-[2rem] bg-white shadow-sm flex flex-col items-center text-center group">
-                                <div className={`w-12 h-12 rounded-2xl ${stat.bg} flex items-center justify-center ${stat.color} mb-4 shadow-inner`}>
-                                    <Icon size={24} />
+                            <div key={i} className="p-4 border border-slate-100 rounded-2xl bg-white shadow-sm flex flex-col items-center text-center">
+                                <div className={`w-10 h-10 rounded-xl ${stat.bg} flex items-center justify-center ${stat.color} mb-3`}>
+                                    <Icon size={20} />
                                 </div>
-                                <h3 className="font-black text-slate-400 uppercase text-[8px] tracking-[0.2em] mb-2">{stat.label}</h3>
-                                <span className="text-3xl font-black text-slate-900 tracking-tighter">{stat.value}</span>
+                                <h3 className="font-black text-slate-400 uppercase text-[7px] tracking-[0.1em] mb-1">{stat.label}</h3>
+                                <span className="text-xl font-black text-slate-900 tracking-tight">{stat.value}</span>
                             </div>
                         );
                     })}
                 </div>
             </section>
 
-            {/* METODOLOGÍA PRÁCTICA */}
-            <section className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden">
-                <div className="absolute right-0 bottom-0 w-64 h-64 bg-indigo-500/10 rounded-full -mr-20 -mb-20 blur-3xl" />
-                <div className="relative z-10">
-                    <h2 className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.4em] mb-6">03. Metodología de Acompañamiento</h2>
-                    <div className="grid grid-cols-2 gap-12">
-                        <div className="space-y-4">
-                            <h4 className="text-lg font-black tracking-tight">El Rol del Tutor</h4>
-                            <p className="text-slate-400 text-xs leading-relaxed">
-                                El tutor no es solo un instructor técnico; es un mentor cultural que modela los valores de fyo y facilita la inmersión en el ecosistema de negocios.
-                            </p>
+            <section>
+                <h2 className="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em] mb-4">Pilares de Formación</h2>
+                <div className="grid grid-cols-3 gap-3">
+                    {objectives.content.pillars.map((p: string, i: number) => (
+                        <div key={i} className="flex items-center gap-2 p-3 bg-indigo-50/50 rounded-xl border border-indigo-100">
+                            <CheckCircle2 size={12} className="text-indigo-500" />
+                            <span className="font-black text-indigo-900 uppercase text-[8px]">{p}</span>
                         </div>
-                        <div className="grid grid-cols-1 gap-3">
-                            {['Transferencia de Criterio', 'Feedback Continuo', 'Gestión del Error'].map((item, i) => (
-                                <div key={i} className="flex items-center gap-3 text-[10px] font-bold">
-                                    <CheckCircle2 size={14} className="text-indigo-400" />
-                                    {item}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </section>
         </div>
 
+        <Footer page={1} total={totalPages} />
+      </div>
+
+      {/* --- PAGE 2: EL ROL DEL TUTOR --- */}
+      <div className="w-[210mm] h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:break-after-page">
+        <Header sectionTitle="02. EL ROL DEL TUTOR" />
+        
+        <div className="space-y-8 flex-1">
+            {tutorSlides.slice(0, 3).map((slide) => {
+                const Icon = IconMap[slide.content.icon] || Compass;
+                return (
+                    <section key={slide.id} className="border border-slate-100 rounded-2xl p-5 bg-slate-50/30">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-8 h-8 bg-white border border-indigo-50 rounded-lg flex items-center justify-center text-indigo-500 shadow-sm">
+                                <Icon size={18} />
+                            </div>
+                            <div>
+                                <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">{slide.title}</h3>
+                                <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">{slide.subtitle}</p>
+                            </div>
+                        </div>
+                        <p className="text-[10px] text-slate-600 mb-4 font-medium">{slide.content.description}</p>
+                        
+                        {slide.content.table && (
+                            <div className="border border-slate-200 rounded-xl overflow-hidden bg-white">
+                                <table className="w-full text-[9px]">
+                                    <thead className="bg-slate-50 border-b border-slate-200">
+                                        <tr>
+                                            {slide.content.table.headers.map((h: string, i: number) => (
+                                                <th key={i} className="p-2 font-black text-slate-400 uppercase tracking-widest text-center">{h}</th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {slide.content.table.rows.map((row: string[], i: number) => (
+                                            <tr key={i} className="border-b border-slate-50 last:border-0">
+                                                {row.map((c: string, j: number) => (
+                                                    <td key={j} className="p-2 text-slate-700 text-center font-bold">{c}</td>
+                                                ))}
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+                    </section>
+                );
+            })}
+        </div>
         <Footer page={2} total={totalPages} />
       </div>
 
-      {/* --- PAGE 2+: CONTENIDO PARA TUTORES --- */}
-      {Array.from({ length: Math.ceil(tutorSlides.length / 2) }).map((_, pageIdx) => (
-          <div key={pageIdx} className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:w-full print:max-w-none print:min-h-screen print:break-after-page">
-              <Header title="GUÍA DE IMPLEMENTACIÓN" continuation={pageIdx > 0} />
-              
-              <div className="space-y-10 flex-1">
-                  {tutorSlides.slice(pageIdx * 2, (pageIdx + 1) * 2).map((slide) => {
-                      const Icon = IconMap[slide.content.icon] || Compass;
-                      return (
-                        <section key={slide.id} className="bg-slate-50/50 rounded-[2rem] p-8 border border-slate-100 relative">
-                            <div className="flex items-start justify-between mb-8">
-                                <div className="flex items-center gap-5">
-                                    <div className="w-14 h-14 bg-white shadow-xl shadow-indigo-900/5 text-indigo-600 rounded-2xl flex items-center justify-center border border-indigo-50">
-                                        <Icon size={28} />
-                                    </div>
-                                    <div>
-                                        <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight leading-none mb-2">
-                                            {slide.title}
-                                        </h2>
-                                        <div className="flex items-center gap-2">
-                                            <div className="h-1 w-10 bg-indigo-600 rounded-full"></div>
-                                            <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">{slide.subtitle}</span>
-                                        </div>
-                                    </div>
-                                </div>
+      {/* --- PAGE 3: HERRAMIENTAS Y COMUNICACIÓN --- */}
+      <div className="w-[210mm] h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:break-after-page">
+        <Header sectionTitle="03. HERRAMIENTAS PRÁCTICAS" />
+        
+        <div className="space-y-8 flex-1">
+            {tutorSlides.slice(3, 6).map((slide) => {
+                const Icon = IconMap[slide.content.icon] || Compass;
+                return (
+                    <section key={slide.id} className="border border-slate-100 rounded-2xl p-5 bg-slate-50/30">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-8 h-8 bg-white border border-indigo-50 rounded-lg flex items-center justify-center text-indigo-500 shadow-sm">
+                                <Icon size={18} />
                             </div>
-
-                            <div className="grid grid-cols-[1fr_200px] gap-10">
-                                <div className="space-y-6">
-                                    <p className="text-slate-800 font-bold text-[13px] leading-relaxed">
-                                        {slide.content.description}
-                                    </p>
-                                    
-                                    {slide.content.bullets && (
-                                        <div className="grid grid-cols-1 gap-3">
-                                            {slide.content.bullets.map((b: string, i: number) => (
-                                                <div key={i} className="flex items-start gap-4 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm">
-                                                    <div className="w-2 h-2 rounded-full bg-indigo-500 mt-1.5 shrink-0 shadow-[0_0_8px_rgba(99,102,241,0.4)]" />
-                                                    <span className="text-[11px] font-bold text-slate-600 leading-snug">{b}</span>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {slide.content.table && (
-                                        <div className="mt-4 border-2 border-slate-100 rounded-3xl overflow-hidden bg-white shadow-sm">
-                                            <table className="w-full text-left border-collapse">
-                                                <thead className="bg-slate-900">
-                                                    <tr>
-                                                        {slide.content.table.headers.map((h: string, i: number) => (
-                                                            <th key={i} className="p-4 text-[9px] font-black text-slate-400 uppercase tracking-widest text-center">{h}</th>
-                                                        ))}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {slide.content.table.rows.map((row: string[], i: number) => (
-                                                        <tr key={i} className="border-t border-slate-50">
-                                                            {row.map((c: string, j: number) => (
-                                                                <td key={j} className="p-4 text-[11px] font-bold text-slate-700 text-center">{c}</td>
-                                                            ))}
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    )}
-                                </div>
-
-                                <div className="space-y-6">
-                                    {slide.content.question && (
-                                        <div className="bg-white p-6 rounded-3xl border-2 border-indigo-50 shadow-lg shadow-indigo-900/5">
-                                            <div className="flex items-center gap-2 mb-4">
-                                                <div className="w-2 h-2 rounded-full bg-indigo-500"></div>
-                                                <span className="text-[9px] font-black uppercase tracking-[0.3em] text-indigo-600 block">Reflexión</span>
-                                            </div>
-                                            <p className="text-[11px] font-bold italic leading-relaxed text-slate-600">
-                                                "{slide.content.question}"
-                                            </p>
-                                        </div>
-                                    )}
-
-                                    {slide.content.highlight && (
-                                        <div className="p-6 bg-indigo-600 text-white rounded-3xl shadow-xl shadow-indigo-200 text-[10px] font-black uppercase tracking-widest leading-tight flex flex-col gap-3">
-                                            <Zap size={20} className="text-indigo-200" />
-                                            {slide.content.highlight}
-                                        </div>
-                                    )}
-                                </div>
+                            <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">{slide.title}</h3>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="space-y-3">
+                                <p className="text-[10px] text-slate-600 font-medium">{slide.content.description}</p>
+                                {slide.content.bullets && (
+                                    <ul className="space-y-1.5">
+                                        {slide.content.bullets.map((b: string, i: number) => (
+                                            <li key={i} className="flex items-start gap-2 text-[9px] text-slate-500 font-bold">
+                                                <div className="w-1 h-1 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+                                                {b}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
-                        </section>
-                      );
-                  })}
-              </div>
+                            <div className="space-y-3">
+                                {slide.content.question && (
+                                    <div className="p-3 bg-white border border-indigo-50 rounded-xl italic text-[9px] text-slate-500 leading-relaxed">
+                                        <span className="font-black text-indigo-500 uppercase text-[7px] block mb-1">Reflexión sugerida:</span>
+                                        "{slide.content.question}"
+                                    </div>
+                                )}
+                                {slide.content.highlight && (
+                                    <div className="p-3 bg-indigo-500 text-white rounded-xl font-black uppercase text-[8px] tracking-wider">
+                                        {slide.content.highlight}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                );
+            })}
+        </div>
+        <Footer page={3} total={totalPages} />
+      </div>
 
-              {/* PRACTICAL TOOL: NOTES SECTION */}
-              <div className="mt-8 p-6 border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50/30">
-                  <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] mb-4">Notas de Seguimiento y Observaciones</h3>
-                  <div className="space-y-3">
-                      <div className="h-px bg-slate-200 w-full" />
-                      <div className="h-px bg-slate-200 w-full" />
-                      <div className="h-px bg-slate-200 w-full" />
-                  </div>
-              </div>
+      {/* --- PAGE 4: GESTIÓN Y CULTURA --- */}
+      <div className="w-[210mm] h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-12 print:shadow-none print:mb-0 print:break-after-page">
+        <Header sectionTitle="04. CULTURA Y GESTIÓN" />
+        
+        <div className="space-y-6 flex-1">
+            {tutorSlides.slice(6).map((slide) => {
+                const Icon = IconMap[slide.content.icon] || Compass;
+                return (
+                    <section key={slide.id} className="border border-slate-100 rounded-2xl p-5 bg-slate-50/30">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-8 h-8 bg-white border border-indigo-50 rounded-lg flex items-center justify-center text-indigo-500 shadow-sm">
+                                <Icon size={18} />
+                            </div>
+                            <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">{slide.title}</h3>
+                        </div>
+                        <p className="text-[10px] text-slate-600 mb-4 font-medium">{slide.content.description}</p>
+                        {slide.content.bullets && (
+                            <div className="grid grid-cols-1 gap-2">
+                                {slide.content.bullets.map((b: string, i: number) => (
+                                    <div key={i} className="p-3 bg-white rounded-xl border border-slate-100 text-[9px] font-bold text-slate-500">
+                                        {b}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                );
+            })}
 
-              <Footer page={pageIdx + 3} total={totalPages} />
-          </div>
-      ))}
+            {/* PRACTICAL TOOL: CHECKLIST */}
+            <div className="p-5 border border-indigo-100 rounded-2xl bg-indigo-50/30">
+                <h3 className="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                    <ClipboardCheck size={14} />
+                    Checklist de Sesión para el Tutor
+                </h3>
+                <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+                    {[
+                        "¿Definí objetivos claros para esta semana?",
+                        "¿Brindé feedback específico sobre tareas?",
+                        "¿Escuché las dudas y desafíos del JP?",
+                        "¿Modelé la cultura fyo en mi trato?",
+                        "¿Identifiqué desvíos y propuse corrección?",
+                        "¿Fomenté la autonomía en la toma de decisión?"
+                    ].map((item, i) => (
+                        <div key={i} className="flex items-center gap-3">
+                            <div className="w-4 h-4 border-2 border-indigo-200 rounded shrink-0" />
+                            <span className="text-[9px] font-bold text-slate-600">{item}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
 
-      {/* --- FINAL PAGE: CIERRE --- */}
-      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl print:shadow-none print:w-full print:max-w-none print:min-h-screen">
-          <Header title="COMPROMISO Y CIERRE" />
+            {/* PRACTICAL TOOL: NOTES SECTION */}
+            <div className="mt-4 p-5 border border-dashed border-slate-300 rounded-2xl bg-slate-50/50 flex-1">
+                <h3 className="text-[8px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">Notas de Seguimiento y Observaciones</h3>
+                <div className="space-y-6">
+                    <div className="h-px bg-slate-200 w-full" />
+                    <div className="h-px bg-slate-200 w-full" />
+                    <div className="h-px bg-slate-200 w-full" />
+                    <div className="h-px bg-slate-200 w-full" />
+                    <div className="h-px bg-slate-200 w-full" />
+                    <div className="h-px bg-slate-200 w-full" />
+                </div>
+            </div>
+        </div>
+        <Footer page={4} total={totalPages} />
+      </div>
+
+      {/* --- PAGE 5: CIERRE Y CONTACTO --- */}
+      <div className="w-[210mm] h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl print:shadow-none">
+          <Header sectionTitle="05. COMPROMISO FINAL" />
           
-          <section className="flex-1 flex flex-col justify-center items-center text-center max-w-2xl mx-auto">
-              <div className="text-8xl mb-10 drop-shadow-xl">🙏</div>
-              <h2 className="text-5xl font-black text-slate-900 uppercase tracking-tighter mb-6 leading-none">{closing.title}</h2>
-              <p className="text-xl text-indigo-600 font-black uppercase tracking-[0.5em] mb-16">{closing.subtitle}</p>
+          <div className="flex-1 flex flex-col justify-center items-center text-center max-w-lg mx-auto">
+              <div className="text-6xl mb-8">🙏</div>
+              <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-4">{closing.title}</h2>
+              <p className="text-sm text-indigo-500 font-black uppercase tracking-[0.4em] mb-12">{closing.subtitle}</p>
               
-              <div className="grid grid-cols-1 gap-8 w-full mb-16">
-                  <div className="text-left bg-slate-50 p-10 rounded-[3rem] border border-slate-100 relative overflow-hidden shadow-inner">
-                      <div className="absolute -right-10 -top-10 w-48 h-48 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
-                      <h3 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em] mb-8 relative z-10">Manifiesto del Tutor</h3>
-                      <div className="grid grid-cols-2 gap-x-12 gap-y-6 relative z-10">
-                          {closing.content.bullets.map((b: string, i: number) => (
-                              <div key={i} className="flex items-center gap-4 text-sm font-bold text-slate-800">
-                                  <div className="w-2.5 h-2.5 bg-indigo-500 rounded-full shrink-0 shadow-[0_0_10px_rgba(99,102,241,0.5)]"></div>
-                                  {b}
-                              </div>
-                          ))}
-                      </div>
-                  </div>
-                  
-                  <div className="p-10 bg-slate-900 text-white rounded-[3rem] shadow-2xl text-center relative overflow-hidden">
-                      <div className="absolute left-0 top-0 w-full h-1.5 bg-indigo-500"></div>
-                      <p className="text-lg font-bold italic leading-relaxed text-slate-300 mb-4">
-                          "{closing.content.description}"
-                      </p>
-                      <span className="text-[10px] font-black uppercase tracking-[0.4em] text-indigo-400">Visión Final</span>
+              <div className="bg-slate-50 p-8 rounded-[2rem] border border-slate-100 w-full mb-10">
+                  <h3 className="text-[9px] font-black text-slate-400 uppercase tracking-[0.3em] mb-6">Manifiesto del Tutor</h3>
+                  <div className="grid grid-cols-1 gap-4 text-left">
+                      {closing.content.bullets.map((b: string, i: number) => (
+                          <div key={i} className="flex items-center gap-3 text-[10px] font-bold text-slate-700">
+                              <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full shrink-0"></div>
+                              {b}
+                          </div>
+                      ))}
                   </div>
               </div>
-          </section>
 
-          <section className="mb-16">
-              <h2 className="text-[11px] font-black text-slate-400 uppercase tracking-[0.4em] mb-10 text-center">Canales de Soporte Estratégico</h2>
-              <div className="flex justify-center gap-24">
+              <div className="p-8 bg-indigo-50 border border-indigo-100 rounded-[2rem] w-full relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
+                  <p className="text-xs font-bold italic leading-relaxed text-indigo-900 mb-2">
+                      "{closing.content.description}"
+                  </p>
+                  <span className="text-[8px] font-black uppercase tracking-[0.4em] text-indigo-400">Visión Final</span>
+              </div>
+          </div>
+
+          <div className="mt-12 border-t border-slate-100 pt-8">
+              <h3 className="text-[8px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6 text-center">Canales de Soporte</h3>
+              <div className="flex justify-center gap-16">
                   {closing.content.contacts.map((c: any, i: number) => (
-                      <div key={i} className="flex items-center gap-5 group">
-                          <div className="bg-indigo-50 p-4 rounded-2xl text-indigo-600 shadow-sm border border-indigo-100">
-                              <Mail size={24} />
+                      <div key={i} className="flex items-center gap-3">
+                          <div className="bg-indigo-50 p-2 rounded-lg text-indigo-600">
+                              <Mail size={16} />
                           </div>
                           <div className="text-left">
-                              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">{c.role}</span>
-                              <span className="text-lg font-black text-slate-900 tracking-tight">{c.email}</span>
+                              <span className="text-[7px] font-black text-slate-400 uppercase block">{c.role}</span>
+                              <span className="text-xs font-black text-slate-900">{c.email}</span>
                           </div>
                       </div>
                   ))}
               </div>
-          </section>
+          </div>
 
-          <Footer page={totalPages} total={totalPages} />
+          <Footer page={5} total={totalPages} />
       </div>
     </div>
   );
