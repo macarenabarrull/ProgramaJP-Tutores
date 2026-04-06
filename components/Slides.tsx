@@ -768,7 +768,7 @@ export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint, onJumpToSlid
 
     return (
         <motion.div 
-            className="flex flex-col justify-center items-center h-full text-center relative max-w-6xl mx-auto px-6 py-4" 
+            className="flex flex-col justify-center items-center h-full text-center relative max-w-6xl mx-auto px-6 py-4 pb-12" 
             initial="hidden" 
             animate="show" 
             variants={containerVariants}
@@ -862,22 +862,22 @@ export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint, onJumpToSlid
             </div>
 
             {/* Contact Info Bar */}
-            <motion.div variants={itemVariants} className="w-full max-w-4xl">
+            <motion.div variants={itemVariants} className="w-full max-w-4xl relative z-50 pointer-events-auto">
                 <div className="flex flex-wrap justify-center gap-6 md:gap-12">
                     {contacts.map((contact: any, idx: number) => (
-                        <a 
+                        <button 
                             key={idx} 
-                            href={`mailto:${contact.email}`}
-                            className="flex items-center gap-3 group transition-all hover:scale-105"
+                            onClick={() => window.location.href = `mailto:${contact.email}`}
+                            className="flex items-center gap-3 group transition-all hover:scale-105 cursor-pointer active:scale-95 pointer-events-auto"
                         >
-                            <div className="w-8 h-8 rounded-lg bg-white/60 border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 group-hover:border-indigo-100 transition-all">
+                            <div className="w-8 h-8 rounded-lg bg-white/60 border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 group-hover:border-indigo-100 transition-all shadow-sm">
                                 <Mail size={14} />
                             </div>
                             <div className="text-left">
                                 <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">{contact.role}</span>
                                 <span className="block text-xs font-bold text-slate-700 group-hover:text-indigo-600 transition-colors underline decoration-indigo-200 underline-offset-2">{contact.email}</span>
                             </div>
-                        </a>
+                        </button>
                     ))}
                 </div>
             </motion.div>
