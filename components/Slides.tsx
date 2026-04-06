@@ -5,7 +5,7 @@ import {
   CheckCircle2, Users, Calendar, GraduationCap, FileText, Flag, Heart, 
   BrainCircuit, Zap, ClipboardCheck, PencilRuler, Search, FileSignature, 
   Rocket, BarChart3, Compass, Target, Layers, Sparkles, DollarSign, Briefcase,
-  Download, Trophy, Shield, Mail
+  Download, Trophy, Shield, Mail, RotateCcw
 } from 'lucide-react';
 import { motion } from "framer-motion";
 
@@ -762,13 +762,13 @@ export const TutorContentSlide: React.FC<SlideProps & { index?: number }> = ({ d
 };
 
 // 11. Closing Slide - Premium Finish
-export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint }) => {
+export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint, onJumpToSlide }) => {
     const contacts = data.content.contacts || [];
     const { description } = data.content;
 
     return (
         <motion.div 
-            className="flex flex-col justify-center items-center h-full text-center relative max-w-6xl mx-auto px-6 py-8" 
+            className="flex flex-col justify-center items-center h-full text-center relative max-w-6xl mx-auto px-6 py-4" 
             initial="hidden" 
             animate="show" 
             variants={containerVariants}
@@ -776,94 +776,108 @@ export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint }) => {
             {/* Background Decorative Element */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-500/5 rounded-full blur-[120px] -z-10" />
 
-            <motion.div variants={itemVariants} className="mb-10 relative z-10">
+            <motion.div variants={itemVariants} className="mb-8 relative z-10">
                 <motion.div 
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="text-6xl md:text-7xl mb-4 drop-shadow-2xl"
+                    className="text-7xl md:text-8xl mb-4 drop-shadow-2xl"
                 >
                     🙏
                 </motion.div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter text-slate-900 mb-4 leading-tight drop-shadow-sm font-display">
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 mb-4 leading-tight drop-shadow-sm font-display">
                     {data.title || '¡Muchas gracias!'}
                 </h1>
                 <div className="flex items-center justify-center gap-4">
-                    <div className="h-px w-12 bg-indigo-200" />
-                    <p className="text-lg text-indigo-600 font-black tracking-[0.4em] uppercase">
+                    <div className="h-px w-16 bg-indigo-200" />
+                    <p className="text-xl text-indigo-600 font-black tracking-[0.5em] uppercase">
                         {data.subtitle || 'JP 25-26'}
                     </p>
-                    <div className="h-px w-12 bg-indigo-200" />
+                    <div className="h-px w-16 bg-indigo-200" />
                 </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full items-stretch relative z-10">
+            <div className="flex flex-col md:flex-row gap-6 w-full max-w-4xl items-stretch relative z-10 mb-8">
                 {/* Motivational Quote Card */}
-                <motion.div variants={itemVariants} className="md:col-span-7">
-                    <GlassCard className="p-8 md:p-10 text-center border-indigo-100/50 bg-white/40 shadow-2xl relative group h-full flex flex-col justify-center">
-                        <div className="absolute top-6 left-8 text-indigo-200/50">
-                            <Sparkles size={40} />
+                <motion.div variants={itemVariants} className="flex-1">
+                    <GlassCard className="p-6 text-center border-indigo-100/50 bg-white/40 shadow-xl relative group h-full flex flex-col justify-center">
+                        <div className="absolute top-4 left-6 text-indigo-200/30">
+                            <Sparkles size={32} />
                         </div>
                         <div className="relative z-10">
-                            <p className="text-xl md:text-2xl font-black text-slate-800 leading-tight tracking-tight italic mb-6">
+                            <p className="text-lg md:text-xl font-bold text-slate-700 leading-tight tracking-tight italic mb-4">
                                 "{description || 'Formar a una persona requiere tiempo, pero impacta directamente en el equipo y el negocio.'}"
                             </p>
-                            <div className="flex items-center justify-center gap-3 text-indigo-500">
-                                <div className="h-1 w-1 rounded-full bg-indigo-400" />
-                                <span className="text-[10px] font-black uppercase tracking-[0.3em]">Reflexión Final</span>
-                                <div className="h-1 w-1 rounded-full bg-indigo-400" />
+                            <div className="flex items-center justify-center gap-2 text-indigo-400">
+                                <div className="h-1 w-1 rounded-full bg-indigo-300" />
+                                <span className="text-[9px] font-black uppercase tracking-[0.3em]">Reflexión Final</span>
+                                <div className="h-1 w-1 rounded-full bg-indigo-300" />
                             </div>
                         </div>
                     </GlassCard>
                 </motion.div>
 
-                {/* Download Center Card */}
-                <motion.div variants={itemVariants} className="md:col-span-5">
-                    <GlassCard className="p-8 border-slate-900/5 bg-slate-900 shadow-2xl h-full flex flex-col items-center justify-center relative overflow-hidden group">
+                {/* Action Center Card */}
+                <motion.div variants={itemVariants} className="md:w-72">
+                    <GlassCard className="p-6 border-indigo-100 bg-indigo-50/50 shadow-xl h-full flex flex-col items-center justify-center relative overflow-hidden group">
                         {/* Decorative background for download card */}
-                        <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-indigo-500/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000" />
+                        <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-indigo-200/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
                         
-                        <div className="relative z-10 flex flex-col items-center w-full">
-                            <div className="w-20 h-24 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg mb-6 flex flex-col p-2 shadow-2xl transform group-hover:rotate-3 transition-transform duration-500">
-                                <div className="w-full h-1 bg-white/30 rounded-full mb-1" />
-                                <div className="w-3/4 h-1 bg-white/20 rounded-full mb-1" />
-                                <div className="w-full h-1 bg-white/20 rounded-full mb-4" />
+                        <div className="relative z-10 flex flex-col items-center w-full gap-3">
+                            <div className="w-12 h-16 bg-white border border-indigo-100 rounded-lg mb-1 flex flex-col p-1.5 shadow-lg transform group-hover:rotate-3 transition-transform duration-500">
+                                <div className="w-full h-0.5 bg-indigo-100 rounded-full mb-1" />
+                                <div className="w-3/4 h-0.5 bg-indigo-50 rounded-full mb-1" />
+                                <div className="w-full h-0.5 bg-indigo-50 rounded-full mb-2" />
                                 <div className="mt-auto flex justify-center">
-                                    <FileText size={24} className="text-indigo-400" />
+                                    <FileText size={16} className="text-indigo-500" />
                                 </div>
                             </div>
                             
-                            <h4 className="text-white font-black text-lg tracking-tight mb-2">Reporte Ejecutivo</h4>
-                            <p className="text-slate-400 text-[10px] uppercase tracking-[0.2em] mb-8">Formato A4 Optimizado</p>
+                            <div className="text-center mb-2">
+                                <h4 className="text-slate-900 font-black text-sm tracking-tight mb-0.5">Reporte Ejecutivo</h4>
+                                <p className="text-slate-500 text-[8px] uppercase tracking-[0.2em]">PDF Optimizado</p>
+                            </div>
                             
                             <button 
                                 onClick={onPrint}
-                                className="w-full group/btn relative flex items-center justify-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-2xl font-black text-xs transition-all shadow-lg hover:bg-indigo-500 hover:-translate-y-1 active:scale-95 font-display tracking-[0.2em] overflow-hidden"
+                                className="w-full group/btn relative flex items-center justify-center gap-2 px-4 py-3 bg-indigo-600 text-white rounded-xl font-black text-[10px] transition-all shadow-md hover:bg-indigo-700 hover:-translate-y-0.5 active:scale-95 font-display tracking-[0.15em] overflow-hidden"
                             >
-                                <Download size={18} className="group-hover/btn:scale-110 transition-transform duration-300" />
-                                <span className="uppercase">Descargar PDF</span>
-                                
-                                {/* Shine effect */}
+                                <Download size={14} className="group-hover/btn:scale-110 transition-transform duration-300" />
+                                <span className="uppercase">Descargar</span>
                                 <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover/btn:animate-shine" />
                             </button>
+
+                            {onJumpToSlide && (
+                                <button 
+                                    onClick={() => onJumpToSlide(0)}
+                                    className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-indigo-100 text-indigo-600 rounded-xl font-black text-[9px] transition-all shadow-sm hover:bg-indigo-50 hover:border-indigo-200 active:scale-95 font-display tracking-[0.15em]"
+                                >
+                                    <RotateCcw size={12} />
+                                    <span className="uppercase">Volver al inicio</span>
+                                </button>
+                            )}
                         </div>
                     </GlassCard>
                 </motion.div>
             </div>
 
             {/* Contact Info Bar */}
-            <motion.div variants={itemVariants} className="mt-10 w-full max-w-4xl">
-                <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+            <motion.div variants={itemVariants} className="w-full max-w-4xl">
+                <div className="flex flex-wrap justify-center gap-6 md:gap-12">
                     {contacts.map((contact: any, idx: number) => (
-                        <div key={idx} className="flex items-center gap-3 group">
-                            <div className="w-10 h-10 rounded-xl bg-white/60 border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 group-hover:border-indigo-100 transition-all">
-                                <Mail size={18} />
+                        <a 
+                            key={idx} 
+                            href={`mailto:${contact.email}`}
+                            className="flex items-center gap-3 group transition-all hover:scale-105"
+                        >
+                            <div className="w-8 h-8 rounded-lg bg-white/60 border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-indigo-50 group-hover:text-indigo-600 group-hover:border-indigo-100 transition-all">
+                                <Mail size={14} />
                             </div>
                             <div className="text-left">
-                                <span className="block text-[9px] font-black text-slate-400 uppercase tracking-wider mb-0.5">{contact.role}</span>
-                                <span className="block text-sm font-bold text-slate-700">{contact.email}</span>
+                                <span className="block text-[8px] font-black text-slate-400 uppercase tracking-wider mb-0.5">{contact.role}</span>
+                                <span className="block text-xs font-bold text-slate-700 group-hover:text-indigo-600 transition-colors underline decoration-indigo-200 underline-offset-2">{contact.email}</span>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </motion.div>

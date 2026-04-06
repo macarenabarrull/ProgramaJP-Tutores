@@ -83,7 +83,7 @@ const App: React.FC = () => {
         case 'tutor-content':
           return <TutorContentSlide data={data} index={currentSlideIndex} />;
         case 'closing':
-          return <ClosingSlide data={data} onPrint={handlePrint} />;
+          return <ClosingSlide data={data} onPrint={handlePrint} onJumpToSlide={jumpToSlide} />;
         default:
           return <div className="text-red-500">Slide type not found</div>;
       }

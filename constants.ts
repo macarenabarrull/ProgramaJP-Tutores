@@ -36,7 +36,7 @@ export const SLIDES: SlideData[] = [
   {
     id: 'intro',
     type: 'objectives',
-    title: 'Objetivos',
+    title: 'OBJETIVOS',
     subtitle: 'Potenciando el ecosistema de negocios',
     content: {
       mainGoal: "Incorporar 10 Jóvenes Profesionales con alto potencial comercial y financiero.",

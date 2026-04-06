@@ -91,13 +91,13 @@
       @media print {
         @page {
           size: A4 portrait;
-          margin: 0; /* Let the component handle margins */
+          margin: 0;
         }
         html, body {
             background-color: #ffffff !important;
-            width: 100%;
+            width: 210mm;
             height: auto;
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
             overflow: visible !important;
         }
@@ -119,6 +119,10 @@
         #root {
           width: 100%;
           overflow: visible;
+        }
+        /* Hide browser headers/footers */
+        header, footer {
+          display: none !important;
         }
       }
     </style>
