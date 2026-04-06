@@ -50,12 +50,16 @@ const App: React.FC = () => {
   }, [nextSlide, prevSlide]);
 
   const handlePrint = useCallback(() => {
+    console.log("handlePrint called");
     setIsPrinting(true);
     // Wait for render update then print
     setTimeout(() => {
         window.print();
-        setIsPrinting(false);
-    }, 100);
+        // Wait a bit more before switching back to normal view
+        setTimeout(() => {
+            setIsPrinting(false);
+        }, 500);
+    }, 500);
   }, []);
 
   const renderSlide = (data: SlideData) => {

@@ -49,27 +49,6 @@ export const SLIDES: SlideData[] = [
     }
   },
   {
-    id: 'profile',
-    type: 'info',
-    title: 'Perfil buscado',
-    subtitle: 'Requisitos y competencias claves',
-    content: {
-      description: "Orientado a jóvenes con breve base previa, curiosidad intelectual y actitud proactiva.",
-      bullets: [
-        "Al menos 1 año de experiencia en áreas comerciales, ventas, logística o finanzas.",
-        "Estudiantes avanzados o graduados de carreras afines.",
-        "Interés genuino por comercialización de granos y mercado financiero.",
-        "Experiencia previa eleva autonomía y velocidad de aprendizaje."
-      ],
-      valueProp: [
-        { title: "Liderá", text: "Tu propio desarrollo profesional." },
-        { title: "Integrate", text: "A equipos comerciales reales desde el inicio." },
-        { title: "Aprendé", text: "Del negocio en acción, no desde la teoría." },
-        { title: "Viví", text: "La experiencia fyo desde adentro." }
-      ]
-    }
-  },
-  {
     id: 'contexto',
     type: 'tutor-content',
     title: 'CONTEXTO Y PROPÓSITO',
@@ -207,7 +186,7 @@ export const SLIDES: SlideData[] = [
     } as TutorContent
   },
   {
-    id: 'expectativas',
+    id: 'closing',
     type: 'closing',
     title: '¡Muchas gracias por su ayuda!',
     subtitle: 'JP 25-26',

@@ -20,21 +20,14 @@ export const ReportView: React.FC<ReportViewProps> = ({ slides }) => {
   const findSlide = (id: string) => slides.find(s => s.id === id);
 
   const objectives = findSlide('intro');
-  const profile = findSlide('profile');
-  const timeline = findSlide('timeline');
   const closing = findSlide('closing');
 
   // Filter for tutor content slides
   const tutorSlides = slides.filter(s => s.type === 'tutor-content');
 
-  if (!objectives || !profile || !timeline || !closing) {
+  if (!objectives || !closing) {
     return <div className="p-12 text-center text-red-600 font-bold">Error: Datos incompletos para el reporte.</div>;
   }
-
-  // Helper to ensure we don't use english in dates if possible
-  const monthMap: Record<string, string> = {
-      'Enero': 'Enero', 'Febrero': 'Febrero', 'Mar-Abr': 'Marzo-Abril', 'Abril': 'Abril', 'Mayo': 'Mayo'
-  };
 
   const Header = ({ continuation = false, title = "PROGRAMA JP 25-26" }) => (
     <header className="mb-6 border-b border-slate-900 pb-2">
@@ -129,66 +122,6 @@ export const ReportView: React.FC<ReportViewProps> = ({ slides }) => {
                             <span className="text-xl font-black text-slate-900 block tracking-tighter">{stat.value}</span>
                         </div>
                     ))}
-                </div>
-            </section>
-
-            {/* 02. PERFIL */}
-            <section>
-                <h2 className="text-[10px] font-black text-slate-900 uppercase mb-4 flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[9px]">2</span> PERFIL DEL CANDIDATO
-                </h2>
-                
-                <div className="grid grid-cols-[180px_1fr] gap-8">
-                    <div className="bg-indigo-600 p-5 rounded-2xl text-white shadow-lg shadow-indigo-100">
-                        <h3 className="text-indigo-200 font-black uppercase text-[8px] tracking-widest mb-4">Requisitos</h3>
-                        <ul className="space-y-3">
-                            {profile.content.bullets.map((b: string, i: number) => (
-                                <li key={i} className="flex items-start gap-2 text-white font-bold text-[9px] leading-tight">
-                                    <div className="w-1 h-1 rounded-full bg-indigo-300 mt-1 shrink-0" /> {b}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div className="space-y-4">
-                        <h3 className="font-black text-slate-400 uppercase text-[8px] tracking-widest border-b border-slate-100 pb-2">Propuesta de Valor</h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            {profile.content.valueProp.map((vp: any, i: number) => (
-                                <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                    <span className="font-black text-slate-800 text-[9px] uppercase block mb-1">{vp.title}</span>
-                                    <span className="text-slate-500 text-[8px] leading-relaxed block">{vp.text}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 03. CRONOGRAMA */}
-            <section>
-                <h2 className="text-[10px] font-black text-slate-900 uppercase mb-4 flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[9px]">3</span> CRONOGRAMA DE ETAPAS
-                </h2>
-                
-                <div className="border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
-                    <table className="w-full text-left border-collapse">
-                        <thead className="bg-slate-900">
-                            <tr>
-                                <th className="p-3 text-[8px] font-black text-slate-400 uppercase tracking-widest">Etapa</th>
-                                <th className="p-3 text-[8px] font-black text-slate-400 uppercase tracking-widest">Mes</th>
-                                <th className="p-3 text-[8px] font-black text-slate-400 uppercase tracking-widest">Descripción</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {timeline.content.map((item: any, i: number) => (
-                                <tr key={i} className="border-t border-slate-100 hover:bg-slate-50 transition-colors">
-                                    <td className="p-3 font-black text-slate-900 uppercase text-[9px]">{item.title}</td>
-                                    <td className="p-3 font-black text-indigo-600 uppercase text-[9px]">{monthMap[item.month] || item.month}</td>
-                                    <td className="p-3 text-slate-500 text-[9px] leading-relaxed">{item.details}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
                 </div>
             </section>
         </div>
