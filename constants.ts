@@ -26,7 +26,7 @@ export const SLIDES: SlideData[] = [
   {
     id: 'cover',
     type: 'cover',
-    title: 'PROGRAMA DE JP 2025/2026',
+    title: 'PROGRAMA DE JP 25-26',
     subtitle: 'Formando el futuro del ecosistema de negocios comerciales',
     content: {
       highlight: '10 Jóvenes Profesionales',
@@ -210,9 +210,9 @@ export const SLIDES: SlideData[] = [
     id: 'expectativas',
     type: 'closing',
     title: '¡Muchas gracias por su ayuda!',
-    subtitle: 'JP 2025/2026',
+    subtitle: 'JP 25-26',
     content: {
-      description: "La verdadera grandeza de un líder no se mide por lo que logra, sino por lo que otros logran gracias a su guía.",
+      description: "Ser tutor es dejar una huella en el camino de otro, transformando el potencial en experiencia y el desafío en aprendizaje compartido.",
       bullets: [
         "Acompañe activamente.",
         "Comparta conocimiento.",

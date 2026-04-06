@@ -99,12 +99,12 @@ export const CoverSlide: React.FC<SlideProps> = ({ data }) => {
                 @fyoonline
             </motion.div>
             
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 mb-6 leading-[1.1] drop-shadow-sm font-display">
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 mb-6 leading-[1.1] drop-shadow-sm font-display">
                 PROGRAMA<br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-emerald-500 to-indigo-600 animate-gradient-x">JP 2025/2026</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-emerald-500 to-indigo-600 animate-gradient-x">JP 25-26</span>
             </motion.h1>
             
-            <motion.p variants={itemVariants} className="text-lg md:text-xl lg:text-2xl text-slate-500 font-bold max-w-2xl leading-relaxed tracking-tight mb-10">
+            <motion.p variants={itemVariants} className="text-base md:text-lg lg:text-xl text-slate-500 font-bold max-w-2xl leading-relaxed tracking-tight mb-10">
                 {data.subtitle}
             </motion.p>
             
@@ -131,7 +131,7 @@ export const ObjectivesSlide: React.FC<SlideProps> = ({ data }) => {
               <Target size={14} />
               Objetivo Principal
           </div>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight font-display">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.1] tracking-tight font-display">
               {data.content.mainGoal.split("10 Jóvenes Profesionales")[0]}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-emerald-600 uppercase">10 JÓVENES PROFESIONALES</span>
               {data.content.mainGoal.split("10 Jóvenes Profesionales")[1]}
@@ -154,8 +154,8 @@ export const ObjectivesSlide: React.FC<SlideProps> = ({ data }) => {
                         <div className="mb-6">
                             <GlowIcon icon={Icon} color={style.text} bg={style.bg} size={32} />
                         </div>
-                        <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{stat.label}</h3>
-                        <div className={`text-5xl font-black tracking-tighter ${style.text}`}>
+                        <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{stat.label}</h3>
+                        <div className={`text-4xl font-black tracking-tighter ${style.text}`}>
                             {stat.value.split(" ")[0]}
                             <span className="text-lg font-bold ml-2 text-slate-400">JP</span>
                         </div>
@@ -192,7 +192,7 @@ export const InfoSlide: React.FC<SlideProps> = ({ data }) => {
   return (
     <motion.div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 h-full items-center py-2" initial="hidden" animate="show" variants={containerVariants}>
       <div className="lg:col-span-7 space-y-4 md:space-y-6">
-        <motion.p variants={itemVariants} className="text-lg md:text-xl lg:text-2xl text-slate-800 font-bold leading-relaxed tracking-tight">
+        <motion.p variants={itemVariants} className="text-base md:text-lg lg:text-xl text-slate-800 font-bold leading-relaxed tracking-tight">
           <Highlight>fyo</Highlight> es una compañía líder en el ecosistema de agronegocios, y este programa busca <Highlight color="text-emerald-600">potenciar el talento joven</Highlight> para liderar el futuro de la industria.
         </motion.p>
         
@@ -295,8 +295,8 @@ export const GridSlide: React.FC<SlideProps> = ({ data }) => {
                         <div className={`w-12 h-12 rounded-2xl ${style.bg} border ${style.border} flex items-center justify-center mb-4 ${style.color} shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                             <Icon size={24} />
                         </div>
-                        <h3 className="text-xl font-black text-slate-900 mb-2 tracking-tight">{item.title}</h3>
-                        <p className="text-slate-600 text-sm md:text-base font-bold leading-relaxed">{item.desc}</p>
+                        <h3 className="text-lg font-black text-slate-900 mb-2 tracking-tight">{item.title}</h3>
+                        <p className="text-slate-600 text-xs md:text-sm font-bold leading-relaxed">{item.desc}</p>
                     </div>
                 </div>
             </motion.div>
@@ -422,7 +422,7 @@ export const MentoringSplitSlide: React.FC<SlideProps> = ({ data }) => {
                  <motion.div variants={itemVariants}>
                     <GlassCard hover className="p-3 md:p-4 border-indigo-100/50">
                         <div className="flex justify-between items-center mb-2">
-                            <h3 className="text-base md:text-lg font-black text-slate-900 flex items-center gap-2 tracking-tight">
+                            <h3 className="text-sm md:text-base font-black text-slate-900 flex items-center gap-2 tracking-tight">
                                 <span className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]"></span>
                                 Mentores Granos
                             </h3>
@@ -443,7 +443,7 @@ export const MentoringSplitSlide: React.FC<SlideProps> = ({ data }) => {
                  <motion.div variants={itemVariants}>
                     <GlassCard hover className="p-3 md:p-4 border-indigo-100/50">
                         <div className="flex justify-between items-center mb-2">
-                            <h3 className="text-base md:text-lg font-black text-slate-900 flex items-center gap-2 tracking-tight">
+                            <h3 className="text-sm md:text-base font-black text-slate-900 flex items-center gap-2 tracking-tight">
                                 <span className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.4)]"></span>
                                 Mentores fyoCapital
                             </h3>
@@ -529,7 +529,7 @@ export const AcademySplitSlide: React.FC<SlideProps> = ({ data }) => {
                         <GlowIcon icon={Calendar} color="text-fuchsia-600" bg="bg-fuchsia-50" size={24} />
                         <div className="text-left md:text-center">
                             <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] block mb-0.5">Cuándo</span>
-                            <span className="text-lg md:text-xl font-black text-slate-900 tracking-tight font-display">Viernes 14-18hs</span>
+                            <span className="text-base md:text-lg font-black text-slate-900 tracking-tight font-display">Viernes 14-18hs</span>
                         </div>
                     </GlassCard>
                 </motion.div>
@@ -538,7 +538,7 @@ export const AcademySplitSlide: React.FC<SlideProps> = ({ data }) => {
                         <GlowIcon icon={GraduationCap} color="text-purple-600" bg="bg-purple-50" size={24} />
                         <div className="text-left md:text-center">
                             <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] block mb-0.5">Frecuencia</span>
-                            <span className="text-lg md:text-xl font-black text-slate-900 tracking-tight font-display">2 Módulos / Sem</span>
+                            <span className="text-base md:text-lg font-black text-slate-900 tracking-tight font-display">2 Módulos / Sem</span>
                         </div>
                     </GlassCard>
                 </motion.div>
@@ -547,7 +547,7 @@ export const AcademySplitSlide: React.FC<SlideProps> = ({ data }) => {
                         <GlowIcon icon={BarChart3} color="text-indigo-600" bg="bg-indigo-50" size={24} />
                         <div className="text-left md:text-center">
                              <span className="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] block mb-0.5">Evaluación</span>
-                             <span className="text-lg md:text-xl font-black text-slate-900 tracking-tight font-display">Examen Mensual</span>
+                             <span className="text-base md:text-lg font-black text-slate-900 tracking-tight font-display">Examen Mensual</span>
                         </div>
                     </GlassCard>
                 </motion.div>
@@ -652,7 +652,7 @@ export const TutorContentSlide: React.FC<SlideProps & { index?: number }> = ({ d
                 /* Layout: Three Squares Redesign */
                 <div className="space-y-8">
                     <motion.div variants={itemVariants} className="text-center max-w-4xl mx-auto">
-                        <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-display mb-4">
+                        <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-display mb-4">
                             {content.description}
                         </h3>
                     </motion.div>
@@ -660,10 +660,10 @@ export const TutorContentSlide: React.FC<SlideProps & { index?: number }> = ({ d
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {getThreeItems().map((item: any, i: number) => (
                             <motion.div key={i} variants={itemVariants}>
-                                <GlassCard hover className={`h-full p-8 flex flex-col items-center text-center border-b-8 ${item.color.split(' ')[2].replace('border', 'border-b')}`}>
-                                    <div className="text-5xl mb-6">{item.emoji}</div>
-                                    <h4 className={`text-xl font-black mb-3 uppercase tracking-wider ${item.color.split(' ')[1]}`}>{item.title}</h4>
-                                    <p className="text-slate-600 font-bold leading-relaxed">{item.desc}</p>
+                                <GlassCard hover className={`h-full p-6 flex flex-col items-center text-center border-b-8 ${item.color.split(' ')[2].replace('border', 'border-b')}`}>
+                                    <div className="text-4xl mb-4">{item.emoji}</div>
+                                    <h4 className={`text-lg font-black mb-2 uppercase tracking-wider ${item.color.split(' ')[1]}`}>{item.title}</h4>
+                                    <p className="text-slate-600 font-bold leading-relaxed text-sm">{item.desc}</p>
                                 </GlassCard>
                             </motion.div>
                         ))}
@@ -682,7 +682,7 @@ export const TutorContentSlide: React.FC<SlideProps & { index?: number }> = ({ d
                 /* Layout: Path / Arrows Redesign */
                 <div className="space-y-12 py-4">
                     <motion.div variants={itemVariants} className="text-center max-w-4xl mx-auto">
-                        <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight font-display mb-4">
+                        <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight font-display mb-4">
                             {content.description}
                         </h3>
                     </motion.div>
@@ -716,7 +716,7 @@ export const TutorContentSlide: React.FC<SlideProps & { index?: number }> = ({ d
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
                     <div className="lg:col-span-12 space-y-6 md:space-y-8">
                         {content.description && (
-                            <motion.p variants={itemVariants} className="text-2xl md:text-3xl text-slate-800 font-black leading-tight text-center max-w-5xl mx-auto">
+                            <motion.p variants={itemVariants} className="text-xl md:text-2xl text-slate-800 font-black leading-tight text-center max-w-5xl mx-auto">
                                 <Highlight>{content.description.split(" ")[0]}</Highlight> {content.description.split(" ").slice(1).join(" ")}
                             </motion.p>
                         )}
@@ -724,11 +724,11 @@ export const TutorContentSlide: React.FC<SlideProps & { index?: number }> = ({ d
                         {content.bullets && (
                             <motion.div variants={containerVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-5xl mx-auto">
                                 {content.bullets.map((bullet: string, idx: number) => (
-                                    <motion.div variants={itemVariants} key={idx} className="flex items-start gap-4 p-5 rounded-3xl bg-white/60 border border-white/80 hover:bg-white hover:shadow-xl transition-all group">
-                                        <div className="mt-1 p-2 bg-indigo-50 rounded-2xl text-indigo-600 group-hover:scale-110 transition-transform shadow-sm text-xl">
+                                    <motion.div variants={itemVariants} key={idx} className="flex items-start gap-4 p-4 rounded-3xl bg-white/60 border border-white/80 hover:bg-white hover:shadow-xl transition-all group">
+                                        <div className="mt-1 p-2 bg-indigo-50 rounded-2xl text-indigo-600 group-hover:scale-110 transition-transform shadow-sm text-lg">
                                             🎯
                                         </div>
-                                        <span className="text-slate-700 text-lg md:text-xl font-bold leading-snug tracking-tight">{bullet}</span>
+                                        <span className="text-slate-700 text-base md:text-lg font-bold leading-snug tracking-tight">{bullet}</span>
                                     </motion.div>
                                 ))}
                             </motion.div>
@@ -737,10 +737,10 @@ export const TutorContentSlide: React.FC<SlideProps & { index?: number }> = ({ d
                         {content.highlight && (
                             <motion.div 
                                 variants={itemVariants}
-                                className="p-6 rounded-3xl border-l-8 shadow-lg bg-gradient-to-r from-indigo-50 to-emerald-50 border-indigo-500 max-w-4xl mx-auto"
+                                className="p-5 rounded-3xl border-l-8 shadow-lg bg-gradient-to-r from-indigo-50 to-emerald-50 border-indigo-500 max-w-4xl mx-auto"
                             >
-                                <p className="font-black text-xl md:text-2xl flex items-center gap-4 text-indigo-900">
-                                    <Zap size={28} className="text-indigo-500" />
+                                <p className="font-black text-lg md:text-xl flex items-center gap-4 text-indigo-900">
+                                    <Zap size={24} className="text-indigo-500" />
                                     {content.highlight}
                                 </p>
                             </motion.div>
@@ -781,17 +781,17 @@ export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint }) => {
                     initial={{ scale: 0.8, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.2, type: "spring" }}
-                    className="text-7xl md:text-9xl mb-8 drop-shadow-2xl"
+                    className="text-6xl md:text-8xl mb-6 drop-shadow-2xl"
                 >
                     🙏
                 </motion.div>
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 mb-6 leading-tight drop-shadow-sm font-display">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-slate-900 mb-6 leading-tight drop-shadow-sm font-display">
                     {data.title || '¡Muchas gracias!'}
                 </h1>
                 <div className="flex items-center justify-center gap-4">
                     <div className="h-px w-12 bg-indigo-200" />
-                    <p className="text-xl md:text-2xl text-indigo-600 font-black tracking-[0.4em] uppercase">
-                        {data.subtitle || 'JP 2025/2026'}
+                    <p className="text-lg md:text-xl text-indigo-600 font-black tracking-[0.4em] uppercase">
+                        {data.subtitle || 'JP 25-26'}
                     </p>
                     <div className="h-px w-12 bg-indigo-200" />
                 </div>
@@ -800,12 +800,12 @@ export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint }) => {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full items-center relative z-10">
                 {/* Motivational Quote Card */}
                 <motion.div variants={itemVariants} className="md:col-span-8">
-                    <GlassCard className="p-10 md:p-16 text-center border-indigo-100/50 bg-white/40 shadow-2xl relative group">
+                    <GlassCard className="p-8 md:p-12 text-center border-indigo-100/50 bg-white/40 shadow-2xl relative group">
                         <div className="absolute top-6 left-8 text-indigo-200/50">
-                            <Sparkles size={64} />
+                            <Sparkles size={48} />
                         </div>
                         <div className="relative z-10">
-                            <p className="text-2xl md:text-4xl font-black text-slate-800 leading-tight tracking-tight italic mb-8">
+                            <p className="text-xl md:text-3xl font-black text-slate-800 leading-tight tracking-tight italic mb-8">
                                 "{description || 'Formar a una persona requiere tiempo, pero impacta directamente en el equipo y el negocio.'}"
                             </p>
                             <div className="flex items-center justify-center gap-3 text-indigo-500">
@@ -843,10 +843,18 @@ export const ClosingSlide: React.FC<SlideProps> = ({ data, onPrint }) => {
             <motion.div variants={itemVariants} className="mt-16 no-print relative z-10">
                 <button 
                     onClick={onPrint}
-                    className="flex items-center gap-4 px-10 py-5 bg-slate-900 text-white rounded-full font-black text-sm hover:bg-indigo-600 transition-all shadow-2xl hover:-translate-y-1 group active:scale-95 font-display tracking-widest"
+                    className="group relative flex items-center gap-4 px-12 py-5 bg-slate-900 text-white rounded-full font-black text-sm transition-all shadow-[0_20px_50px_rgba(0,0,0,0.2)] hover:shadow-indigo-500/30 hover:-translate-y-1 active:scale-95 font-display tracking-[0.2em] overflow-hidden"
                 >
-                    <Download size={20} className="group-hover:scale-110 transition-transform" />
-                    DESCARGAR REPORTE PDF
+                    {/* Animated background gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-fuchsia-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    
+                    <div className="relative z-10 flex items-center gap-4">
+                        <Download size={20} className="group-hover:scale-110 transition-transform duration-300" />
+                        <span className="uppercase">Descargar Reporte PDF</span>
+                    </div>
+                    
+                    {/* Shine effect */}
+                    <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine" />
                 </button>
             </motion.div>
         </motion.div>

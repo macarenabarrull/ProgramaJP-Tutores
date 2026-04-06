@@ -31,195 +31,225 @@ export const ReportView: React.FC<ReportViewProps> = ({ slides }) => {
     return <div className="p-12 text-center text-red-600 font-bold">Error: Datos incompletos para el reporte.</div>;
   }
 
-  const consultoriaCount = objectives.content.stats.find((s:any) => s.label === 'Consultoría')?.value || '2 JP';
-
   // Helper to ensure we don't use english in dates if possible
   const monthMap: Record<string, string> = {
       'Enero': 'Enero', 'Febrero': 'Febrero', 'Mar-Abr': 'Marzo-Abril', 'Abril': 'Abril', 'Mayo': 'Mayo'
   };
 
   const Header = ({ continuation = false, title = "PROGRAMA JP 25-26" }) => (
-    <header className="mb-8 border-b-2 border-slate-900 pb-2">
+    <header className="mb-6 border-b border-slate-900 pb-2">
         <div className="flex justify-between items-end">
             <div>
-                <h3 className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">
-                    REPORTE EJECUTIVO {continuation && <span className="text-slate-400">| CONTINUACIÓN</span>}
+                <h3 className="text-[8px] text-slate-400 font-black uppercase tracking-[0.2em] mb-1">
+                    REPORTE EJECUTIVO {continuation && <span className="text-slate-300">| CONTINUACIÓN</span>}
                 </h3>
-                <h1 className="text-3xl font-black text-slate-900 uppercase tracking-tight leading-none">
+                <h1 className="text-2xl font-black text-slate-900 uppercase tracking-tight leading-none">
                     {title}
                 </h1>
             </div>
             <div className="text-right">
-                <div className="text-5xl font-black text-slate-200 tracking-tighter leading-none">fyo<span className="text-fuchsia-600">.</span></div>
-                <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">TALENTO Y CULTURA</div>
+                <div className="text-4xl font-black text-slate-100 tracking-tighter leading-none">fyo<span className="text-indigo-600">.</span></div>
+                <div className="text-[8px] font-black text-slate-400 uppercase tracking-widest mt-0.5">TALENTO Y CULTURA</div>
             </div>
         </div>
     </header>
   );
 
   const Footer = ({ page, total }: { page: number, total: number }) => (
-    <footer className="mt-auto pt-4 flex justify-between items-center text-[9px] text-slate-400 border-t border-slate-200">
-        <div className="font-bold uppercase tracking-widest">Programa JP 25-26 | Guía para Tutores</div>
-        <div>Uso Interno | Página {page}/{total}</div>
+    <footer className="mt-auto pt-4 flex justify-between items-center text-[8px] text-slate-300 border-t border-slate-100">
+        <div className="font-black uppercase tracking-[0.2em]">Programa JP 25-26 | Guía para Tutores</div>
+        <div className="font-bold">Página {page} de {total}</div>
     </footer>
   );
 
-  const totalPages = 2 + Math.ceil(tutorSlides.length / 2);
+  const totalPages = 3 + Math.ceil(tutorSlides.length / 2);
 
   return (
-    <div className="w-full bg-white text-slate-800 font-sans text-[11px] leading-relaxed print:p-0">
+    <div className="w-full bg-slate-50 text-slate-800 font-sans text-[10px] leading-relaxed print:p-0 print:bg-white">
         
-      {/* --- PAGE 1: ESTRUCTURA DEL PROGRAMA --- */}
-      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[1.5cm] relative flex flex-col bg-white print:w-full print:max-w-none print:min-h-screen">
-        <Header title="ESTRUCTURA DEL PROGRAMA" />
-        
-        {/* 01. OBJETIVOS */}
-        <section className="mb-8">
-            <h2 className="text-sm font-black text-slate-900 uppercase mb-2 flex items-center gap-2">
-                <span className="text-fuchsia-600">01.</span> OBJETIVOS Y ALCANCE
-            </h2>
-            <div className="bg-slate-50 p-4 border-l-4 border-slate-900 mb-4">
-                 <p className="text-slate-700 font-medium italic">
-                    "{objectives.content.mainGoal}"
-                 </p>
-            </div>
+      {/* --- PAGE 0: COVER PAGE --- */}
+      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[2.5cm] relative flex flex-col bg-white shadow-2xl mb-8 print:shadow-none print:mb-0 print:w-full print:max-w-none print:min-h-screen print:break-after-page">
+          <div className="absolute top-0 left-0 w-full h-2 bg-indigo-600"></div>
+          
+          <div className="mt-20">
+              <div className="text-7xl font-black text-slate-100 tracking-tighter mb-4">fyo<span className="text-indigo-600">.</span></div>
+              <div className="h-1 w-20 bg-indigo-600 mb-12"></div>
+              
+              <h3 className="text-lg font-black text-indigo-600 uppercase tracking-[0.4em] mb-4">Programa de Talentos</h3>
+              <h1 className="text-6xl font-black text-slate-900 leading-none tracking-tighter mb-8">
+                  GUÍA PARA<br />TUTORES<br />JP 25-26
+              </h1>
+              
+              <p className="text-xl text-slate-500 font-medium max-w-md leading-relaxed mb-20">
+                  Manual de acompañamiento, objetivos y herramientas para el desarrollo de Jóvenes Profesionales.
+              </p>
+          </div>
 
-            <div className="grid grid-cols-3 gap-4">
-                <div className="p-3 border border-slate-200 rounded bg-white">
-                    <div className="flex items-center gap-2 mb-2">
-                        <Users size={14} className="text-green-600"/>
-                        <h3 className="font-bold text-slate-900 uppercase text-[10px]">Mesa de Granos</h3>
-                    </div>
-                    <span className="text-lg font-black text-slate-900 block">{objectives.content.stats[0].value}</span>
-                </div>
-
-                <div className="p-3 border border-slate-200 rounded bg-white">
-                    <div className="flex items-center gap-2 mb-2">
-                        <DollarSign size={14} className="text-blue-600"/>
-                        <h3 className="font-bold text-slate-900 uppercase text-[10px]">fyoCapital</h3>
-                    </div>
-                    <span className="text-lg font-black text-slate-900 block">{objectives.content.stats[1].value}</span>
-                </div>
-
-                <div className="p-3 border border-slate-200 rounded bg-white">
-                    <div className="flex items-center gap-2 mb-2">
-                        <Briefcase size={14} className="text-purple-600"/>
-                        <h3 className="font-bold text-slate-900 uppercase text-[10px]">Consultoría</h3>
-                    </div>
-                    <span className="text-lg font-black text-slate-900 block">{consultoriaCount}</span>
-                </div>
-            </div>
-        </section>
-
-        {/* 02. PERFIL */}
-        <section className="mb-8">
-            <h2 className="text-sm font-black text-slate-900 uppercase mb-3 flex items-center gap-2">
-                <span className="text-fuchsia-600">02.</span> PERFIL DEL CANDIDATO
-            </h2>
-            
-            <div className="flex gap-6">
-                <div className="w-1/3 bg-fuchsia-50 p-4 rounded-sm border border-fuchsia-100">
-                    <h3 className="text-fuchsia-900 font-bold uppercase text-[10px] mb-2">Requisitos Clave</h3>
-                    <ul className="space-y-2">
-                        {profile.content.bullets.map((b: string, i: number) => (
-                            <li key={i} className="flex items-start gap-2 text-fuchsia-900 text-[10px] leading-tight">
-                                <span className="text-fuchsia-500 mt-0.5">•</span> {b}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                <div className="flex-1">
-                    <h3 className="font-bold text-slate-900 uppercase text-[10px] mb-2 border-b border-slate-200 pb-1">Propuesta de Valor</h3>
-                    <div className="grid grid-cols-2 gap-4">
-                        {profile.content.valueProp.map((vp: any, i: number) => (
-                             <div key={i}>
-                                <span className="font-bold text-slate-800 text-[10px] uppercase block">{vp.title}</span>
-                                <span className="text-slate-600 text-[10px]">{vp.text}</span>
-                             </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {/* 03. CRONOGRAMA */}
-        <section className="flex-1">
-             <h2 className="text-sm font-black text-slate-900 uppercase mb-3 flex items-center gap-2">
-                <span className="text-fuchsia-600">03.</span> CRONOGRAMA DE ETAPAS
-            </h2>
-            
-            <div className="space-y-3">
-                {timeline.content.map((item: any, i: number) => (
-                    <div key={i} className="flex items-start gap-4 pb-3 border-b border-slate-100 last:border-0">
-                        <div className="w-6 h-6 bg-slate-900 text-white font-bold text-[10px] flex items-center justify-center rounded shrink-0">
-                            {i + 1}
-                        </div>
-                        <div className="grid grid-cols-[100px_1fr] gap-4 w-full">
-                             <div className="font-bold text-fuchsia-600 uppercase text-[10px] pt-0.5">{monthMap[item.month] || item.month}</div>
-                             <div>
-                                <h4 className="font-bold text-slate-900 text-[10px] uppercase mb-0.5">{item.title}</h4>
-                                <p className="text-slate-500 text-[10px]">{item.details}</p>
-                             </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </section>
-
-        <Footer page={1} total={totalPages} />
+          <div className="mt-auto grid grid-cols-2 gap-12 border-t border-slate-100 pt-12">
+              <div>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Departamento</span>
+                  <span className="text-sm font-bold text-slate-900">Talento y Cultura</span>
+              </div>
+              <div>
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2">Fecha de Emisión</span>
+                  <span className="text-sm font-bold text-slate-900">Abril 2026</span>
+              </div>
+          </div>
       </div>
 
-      <div className="print:break-before-page"></div>
+      {/* --- PAGE 1: ESTRUCTURA DEL PROGRAMA --- */}
+      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-8 print:shadow-none print:mb-0 print:w-full print:max-w-none print:min-h-screen print:break-after-page">
+        <Header title="ESTRUCTURA DEL PROGRAMA" />
+        
+        <div className="space-y-8 flex-1">
+            {/* RESUMEN EJECUTIVO */}
+            <section className="grid grid-cols-[200px_1fr] gap-8 items-start">
+                <div className="space-y-4">
+                    <h2 className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.2em]">Resumen</h2>
+                    <p className="text-[9px] text-slate-500 leading-relaxed">
+                        Este documento detalla la metodología de acompañamiento para los Jóvenes Profesionales (JP) durante el ciclo 25-26, definiendo el rol del tutor como pieza clave en la transferencia de cultura y conocimiento técnico.
+                    </p>
+                </div>
+                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <p className="text-slate-800 font-bold italic text-[11px] leading-relaxed">
+                        "{objectives.content.mainGoal}"
+                    </p>
+                </div>
+            </section>
+
+            {/* 01. OBJETIVOS */}
+            <section>
+                <h2 className="text-[10px] font-black text-slate-900 uppercase mb-4 flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[9px]">1</span> OBJETIVOS Y ALCANCE
+                </h2>
+                <div className="grid grid-cols-3 gap-4">
+                    {objectives.content.stats.map((stat: any, i: number) => (
+                        <div key={i} className="p-4 border border-slate-100 rounded-2xl bg-white shadow-sm">
+                            <h3 className="font-black text-slate-400 uppercase text-[7px] tracking-widest mb-1">{stat.label}</h3>
+                            <span className="text-xl font-black text-slate-900 block tracking-tighter">{stat.value}</span>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* 02. PERFIL */}
+            <section>
+                <h2 className="text-[10px] font-black text-slate-900 uppercase mb-4 flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[9px]">2</span> PERFIL DEL CANDIDATO
+                </h2>
+                
+                <div className="grid grid-cols-[180px_1fr] gap-8">
+                    <div className="bg-indigo-600 p-5 rounded-2xl text-white shadow-lg shadow-indigo-100">
+                        <h3 className="text-indigo-200 font-black uppercase text-[8px] tracking-widest mb-4">Requisitos</h3>
+                        <ul className="space-y-3">
+                            {profile.content.bullets.map((b: string, i: number) => (
+                                <li key={i} className="flex items-start gap-2 text-white font-bold text-[9px] leading-tight">
+                                    <div className="w-1 h-1 rounded-full bg-indigo-300 mt-1 shrink-0" /> {b}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="space-y-4">
+                        <h3 className="font-black text-slate-400 uppercase text-[8px] tracking-widest border-b border-slate-100 pb-2">Propuesta de Valor</h3>
+                        <div className="grid grid-cols-2 gap-4">
+                            {profile.content.valueProp.map((vp: any, i: number) => (
+                                <div key={i} className="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                    <span className="font-black text-slate-800 text-[9px] uppercase block mb-1">{vp.title}</span>
+                                    <span className="text-slate-500 text-[8px] leading-relaxed block">{vp.text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 03. CRONOGRAMA */}
+            <section>
+                <h2 className="text-[10px] font-black text-slate-900 uppercase mb-4 flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-lg bg-slate-900 text-white flex items-center justify-center text-[9px]">3</span> CRONOGRAMA DE ETAPAS
+                </h2>
+                
+                <div className="border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                    <table className="w-full text-left border-collapse">
+                        <thead className="bg-slate-900">
+                            <tr>
+                                <th className="p-3 text-[8px] font-black text-slate-400 uppercase tracking-widest">Etapa</th>
+                                <th className="p-3 text-[8px] font-black text-slate-400 uppercase tracking-widest">Mes</th>
+                                <th className="p-3 text-[8px] font-black text-slate-400 uppercase tracking-widest">Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {timeline.content.map((item: any, i: number) => (
+                                <tr key={i} className="border-t border-slate-100 hover:bg-slate-50 transition-colors">
+                                    <td className="p-3 font-black text-slate-900 uppercase text-[9px]">{item.title}</td>
+                                    <td className="p-3 font-black text-indigo-600 uppercase text-[9px]">{monthMap[item.month] || item.month}</td>
+                                    <td className="p-3 text-slate-500 text-[9px] leading-relaxed">{item.details}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <Footer page={2} total={totalPages} />
+      </div>
 
       {/* --- PAGE 2+: CONTENIDO PARA TUTORES --- */}
       {Array.from({ length: Math.ceil(tutorSlides.length / 2) }).map((_, pageIdx) => (
-          <div key={pageIdx} className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[1.5cm] relative flex flex-col bg-white print:w-full print:max-w-none print:min-h-screen print:break-after-page">
+          <div key={pageIdx} className="w-full max-w-[210mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl mb-8 print:shadow-none print:mb-0 print:w-full print:max-w-none print:min-h-screen print:break-after-page">
               <Header title="GUÍA PARA EL TUTOR" continuation={pageIdx > 0} />
               
               <div className="space-y-12 flex-1">
-                  {tutorSlides.slice(pageIdx * 2, (pageIdx + 2) * 2).map((slide) => {
+                  {tutorSlides.slice(pageIdx * 2, (pageIdx + 1) * 2).map((slide) => {
                       const Icon = IconMap[slide.content.icon] || Compass;
                       return (
                         <section key={slide.id} className="border-b border-slate-100 pb-10 last:border-0">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="p-2 bg-fuchsia-100 text-fuchsia-600 rounded">
-                                    <Icon size={18} />
+                            <div className="flex items-center gap-4 mb-6">
+                                <div className="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
+                                    <Icon size={20} />
                                 </div>
-                                <h2 className="text-sm font-black text-slate-900 uppercase tracking-tight">
-                                    {slide.title}
-                                </h2>
+                                <div>
+                                    <h2 className="text-lg font-black text-slate-900 uppercase tracking-tight leading-none mb-1">
+                                        {slide.title}
+                                    </h2>
+                                    <div className="h-1 w-8 bg-indigo-600 rounded-full"></div>
+                                </div>
                             </div>
 
-                            <div className="grid grid-cols-[1fr_200px] gap-8">
-                                <div className="space-y-4">
-                                    <p className="text-slate-700 font-medium text-[10px] leading-relaxed">
+                            <div className="grid grid-cols-[1fr_180px] gap-10">
+                                <div className="space-y-6">
+                                    <p className="text-slate-700 font-bold text-sm leading-relaxed">
                                         {slide.content.description}
                                     </p>
+                                    
                                     {slide.content.bullets && (
-                                        <ul className="space-y-2">
+                                        <div className="grid grid-cols-1 gap-3">
                                             {slide.content.bullets.map((b: string, i: number) => (
-                                                <li key={i} className="flex items-start gap-2 text-[9px] text-slate-600">
-                                                    <span className="text-fuchsia-500 mt-0.5">•</span> {b}
-                                                </li>
+                                                <div key={i} className="flex items-start gap-3 p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
+                                                    <span className="text-[10px] font-bold text-slate-600 leading-tight">{b}</span>
+                                                </div>
                                             ))}
-                                        </ul>
+                                        </div>
                                     )}
+
                                     {slide.content.table && (
-                                        <div className="mt-4 border border-slate-200 rounded overflow-hidden">
+                                        <div className="mt-4 border border-slate-100 rounded-2xl overflow-hidden">
                                             <table className="w-full text-left border-collapse">
                                                 <thead className="bg-slate-50">
                                                     <tr>
                                                         {slide.content.table.headers.map((h: string, i: number) => (
-                                                            <th key={i} className="p-2 text-[8px] font-bold text-slate-500 uppercase border-b border-slate-200 text-center">{h}</th>
+                                                            <th key={i} className="p-3 text-[8px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 text-center">{h}</th>
                                                         ))}
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {slide.content.table.rows.map((row: string[], i: number) => (
-                                                        <tr key={i}>
+                                                        <tr key={i} className="hover:bg-slate-50/50 transition-colors">
                                                             {row.map((c: string, j: number) => (
-                                                                <td key={j} className="p-2 text-[9px] text-slate-600 border-b border-slate-100 text-center">{c}</td>
+                                                                <td key={j} className="p-3 text-[10px] font-bold text-slate-600 border-b border-slate-50 text-center">{c}</td>
                                                             ))}
                                                         </tr>
                                                     ))}
@@ -227,17 +257,22 @@ export const ReportView: React.FC<ReportViewProps> = ({ slides }) => {
                                             </table>
                                         </div>
                                     )}
+
                                     {slide.content.highlight && (
-                                        <div className="p-3 bg-fuchsia-50 border-l-2 border-fuchsia-500 text-[9px] font-bold text-fuchsia-900">
-                                            👉 {slide.content.highlight}
+                                        <div className="p-4 bg-indigo-600 text-white rounded-2xl shadow-lg shadow-indigo-100 text-[10px] font-black uppercase tracking-widest flex items-center gap-3">
+                                            <Zap size={16} className="text-indigo-200" />
+                                            {slide.content.highlight}
                                         </div>
                                     )}
                                 </div>
 
                                 {slide.content.question && (
-                                    <div className="bg-slate-900 p-4 rounded text-white self-start">
-                                        <span className="text-[8px] font-black uppercase tracking-widest text-fuchsia-400 block mb-2">Pregunta</span>
-                                        <p className="text-[10px] font-medium italic leading-snug">
+                                    <div className="bg-slate-900 p-6 rounded-3xl text-white self-start shadow-xl">
+                                        <div className="flex items-center gap-2 mb-4">
+                                            <div className="w-2 h-2 rounded-full bg-indigo-400"></div>
+                                            <span className="text-[8px] font-black uppercase tracking-[0.3em] text-indigo-400 block">Reflexión</span>
+                                        </div>
+                                        <p className="text-xs font-bold italic leading-relaxed text-slate-200">
                                             "{slide.content.question}"
                                         </p>
                                     </div>
@@ -248,51 +283,54 @@ export const ReportView: React.FC<ReportViewProps> = ({ slides }) => {
                   })}
               </div>
 
-              <Footer page={pageIdx + 2} total={totalPages} />
+              <Footer page={pageIdx + 3} total={totalPages} />
           </div>
       ))}
 
       {/* --- FINAL PAGE: CIERRE --- */}
-      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[1.5cm] relative flex flex-col bg-white print:w-full print:max-w-none print:min-h-screen">
+      <div className="w-full max-w-[210mm] min-h-[297mm] mx-auto p-[2cm] relative flex flex-col bg-white shadow-2xl print:shadow-none print:w-full print:max-w-none print:min-h-screen">
           <Header title="EXPECTATIVAS Y CIERRE" />
           
           <section className="flex-1 flex flex-col justify-center items-center text-center max-w-2xl mx-auto">
-              <h2 className="text-2xl font-black text-slate-900 uppercase mb-4">{closing.title}</h2>
-              <p className="text-sm text-slate-500 mb-8">{closing.subtitle}</p>
+              <div className="text-6xl mb-8">🙏</div>
+              <h2 className="text-4xl font-black text-slate-900 uppercase tracking-tighter mb-4 leading-none">{closing.title}</h2>
+              <p className="text-lg text-indigo-600 font-black uppercase tracking-[0.4em] mb-12">{closing.subtitle}</p>
               
-              <div className="grid grid-cols-2 gap-4 w-full mb-12">
-                  <div className="text-left bg-slate-50 p-6 rounded border border-slate-100">
-                      <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Compromisos del Tutor</h3>
-                      <ul className="space-y-3">
+              <div className="grid grid-cols-1 gap-6 w-full mb-12">
+                  <div className="text-left bg-slate-50 p-8 rounded-3xl border border-slate-100 relative overflow-hidden">
+                      <div className="absolute -right-10 -top-10 w-40 h-40 bg-indigo-100 rounded-full blur-3xl opacity-50"></div>
+                      <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-6 relative z-10">Compromisos del Tutor</h3>
+                      <div className="grid grid-cols-2 gap-x-8 gap-y-4 relative z-10">
                           {closing.content.bullets.map((b: string, i: number) => (
-                              <li key={i} className="flex items-center gap-3 text-[10px] font-bold text-slate-700">
-                                  <div className="w-1.5 h-1.5 bg-fuchsia-500 rounded-full"></div>
+                              <div key={i} className="flex items-center gap-3 text-[11px] font-bold text-slate-700">
+                                  <div className="w-2 h-2 bg-indigo-500 rounded-full shrink-0"></div>
                                   {b}
-                              </li>
+                              </div>
                           ))}
-                      </ul>
-                  </div>
-                  <div className="flex flex-col justify-center gap-4">
-                      <div className="p-6 bg-fuchsia-600 text-white rounded shadow-lg text-left">
-                          <p className="text-xs font-bold leading-snug">
-                              👉 {closing.content.highlight}
-                          </p>
                       </div>
+                  </div>
+                  
+                  <div className="p-8 bg-slate-900 text-white rounded-3xl shadow-2xl text-center relative overflow-hidden">
+                      <div className="absolute left-0 top-0 w-full h-1 bg-indigo-500"></div>
+                      <p className="text-sm font-bold italic leading-relaxed text-slate-300 mb-2">
+                          "{closing.content.description}"
+                      </p>
+                      <span className="text-[9px] font-black uppercase tracking-[0.3em] text-indigo-400">Reflexión Final</span>
                   </div>
               </div>
           </section>
 
-          <section className="mb-8">
-              <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 text-center">Canales de Contacto</h2>
-              <div className="flex justify-center gap-12">
+          <section className="mb-12">
+              <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-6 text-center">Canales de Contacto</h2>
+              <div className="flex justify-center gap-16">
                   {closing.content.contacts.map((c: any, i: number) => (
-                      <div key={i} className="flex items-center gap-3">
-                          <div className="bg-slate-100 p-2 rounded-full">
-                              <Mail size={14} className="text-slate-600" />
+                      <div key={i} className="flex items-center gap-4 group">
+                          <div className="bg-indigo-50 p-3 rounded-2xl text-indigo-600">
+                              <Mail size={18} />
                           </div>
                           <div className="text-left">
-                              <span className="text-[8px] font-bold text-slate-400 uppercase block">{c.role}</span>
-                              <span className="text-[10px] font-bold text-slate-900">{c.email}</span>
+                              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">{c.role}</span>
+                              <span className="text-sm font-black text-slate-900">{c.email}</span>
                           </div>
                       </div>
                   ))}

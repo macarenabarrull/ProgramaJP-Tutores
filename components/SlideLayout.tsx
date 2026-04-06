@@ -192,7 +192,7 @@ export const SlideLayout: React.FC<SlideLayoutProps> = ({
           <div className="h-6 w-px bg-slate-300/50 mx-1"></div>
           <div className="flex flex-col leading-none">
              <span className="text-[10px] md:text-[11px] font-black tracking-[0.3em] text-indigo-900 uppercase">Programa JP</span>
-             <span className="text-[9px] md:text-[10px] text-slate-500 font-black tracking-widest">2025 / 2026</span>
+             <span className="text-[9px] md:text-[10px] text-slate-500 font-black tracking-widest">25 / 26</span>
           </div>
         </div>
         

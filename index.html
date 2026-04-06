@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- SEO & Open Graph -->
-    <title>Programa JP 2025-2026 | fyo</title>
-    <meta name="description" content="Presentación del Programa de Jóvenes Profesionales 2025-2026. Formando el futuro del ecosistema de negocios comerciales." />
-    <meta property="og:title" content="Programa JP 2025-2026 | fyo" />
+    <title>Programa JP 25-26 | fyo</title>
+    <meta name="description" content="Presentación del Programa de Jóvenes Profesionales 25-26. Formando el futuro del ecosistema de negocios comerciales." />
+    <meta property="og:title" content="Programa JP 25-26 | fyo" />
     <meta property="og:description" content="Conoce los objetivos, el perfil buscado y el cronograma del nuevo programa de talentos." />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" />
@@ -68,6 +68,15 @@
         animation-delay: 4s;
       }
 
+      @keyframes shine {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+      
+      .animate-shine {
+        animation: shine 1.5s infinite;
+      }
+
       ::-webkit-scrollbar {
         width: 6px;
       }
@@ -82,12 +91,12 @@
       @media print {
         @page {
           size: A4 portrait;
-          margin: 1.5cm; /* Standard margins to guide the browser into portrait */
+          margin: 0; /* Let the component handle margins */
         }
         html, body {
             background-color: #ffffff !important;
             width: 100%;
-            height: 100%;
+            height: auto;
             margin: 0;
             padding: 0;
             overflow: visible !important;
